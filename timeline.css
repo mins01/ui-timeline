@@ -60,9 +60,7 @@
 
 
 /* timeline-background */
-.timeline .timeline-background{
-    background-color: #eeeeee;
-}
+
 .timeline .timeline-background .times .time{
     display: block;
     margin:0 0px;
@@ -71,9 +69,9 @@
     content: "";
     display: block;
     height: 100%;
-    width:1px;
+    width:2px;
     margin-left: -1px;
-    border-right: 2px solid #9993;
+    background-color: #9993;
 }
 .timeline .timeline-background .time:first-of-type::before{
     content: none;
@@ -111,6 +109,12 @@
 
 
 /* for custom */
+.timeline .timeline-background{
+    background-color: #eeeeee;
+}
+.timeline .timeline-background .time::before{
+    background-color: #9993;
+}
 .timeline .time-label{
     text-align: center;
     padding:1px;
@@ -148,6 +152,11 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+
+
+
+
 
 
 
