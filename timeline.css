@@ -109,8 +109,11 @@
 
 
 /* for custom */
+.timeline{
+    background-color: #eee;
+}
 .timeline .timeline-background{
-    background-color: #eeeeee;
+    background-color: transparent;
 }
 .timeline .timeline-background .time::before{
     background-color: #9993;
