@@ -29,14 +29,16 @@
 }
 .timeline .line .line-content , 
 .timeline .line::before , 
-.timeline .line::after{flex: 1 1 0; min-width: 0; content: ''; pointer-events: none;}
+.timeline .line::after{ flex: 1 1 0; min-width: 0; }
 .timeline .line::before ,
-.timeline .line::after{opacity: 0;}
+.timeline .line::after{ content: ''; pointer-events: none; opacity: 0; }
 
 .timeline .line .line-content{
     pointer-events: all;
     flex-grow: calc(var(--end) - var(--start) + var(--min-grow));
 }
+
+
 .timeline .line::before{
     flex-grow: calc(var(--start) - var(--min-grow));
 }
@@ -54,8 +56,12 @@
     inset: 0;
 }
 .timeline .line-container > *:first-child{
-    position: static;
+    position: relative;
 }
+.timeline .line-container > *:where(:hover, :active, :focus-within,:focus,:focus-visible){
+    z-index: 2;
+}
+
 
 
 
