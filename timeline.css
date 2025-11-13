@@ -27,6 +27,10 @@
     --start:1;
     --end:var(--max-grow);
 }
+.timeline .line.line-hidden{
+    visibility: hidden;
+}
+
 .timeline .line .line-content , 
 .timeline .line::before , 
 .timeline .line::after{ flex: 1 1 0; min-width: 0; }
