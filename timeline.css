@@ -50,13 +50,13 @@
 .timeline .line-container{
     position: relative;
     pointer-events: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
 }
 .timeline .line-container > *{
-    position: absolute;
-    inset: 0;
-}
-.timeline .line-container > *:first-child{
     position: relative;
+    grid-column: 1; grid-row: 1;
 }
 .timeline .line-container > *:where(:hover, :active, :focus-within,:focus,:focus-visible){
     z-index: 2;
@@ -87,9 +87,8 @@
 /* layout */
 .timeline{
     position: relative;
-}
-.timeline .timeline-header{
-    position: static;
+    display: flex;
+    flex-direction: column;
 }
 .timeline .timeline-header{
     position: relative;   
@@ -99,7 +98,6 @@
     position: absolute;
     inset: 0;
     z-index: 1;
-    pointer-events: none;
 }
 .timeline .timeline-background .times{
     height: 100%;
@@ -109,9 +107,6 @@
     position: relative;
     z-index: 2;
 }
-
-
-
 
 
 /* for custom */
