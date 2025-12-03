@@ -90,60 +90,138 @@
                 console.log(lines); // .lineElement 가 생긴다. 후속조치는 알아서 또는 .createLineContentElement(line) 메소드 재정의하던지
                 tlh.draw();
             }
+            {
+                const tlh = new TimelineHandler(document.querySelector('#tlh04'));
+                tlh.maxGrow = maxGrow;
+                tlh.setTimes(times);
+                tlh.setLines(lines);
+                console.log(lines); // .lineElement 가 생긴다. 후속조치는 알아서 또는 .createLineContentElement(line) 메소드 재정의하던지
+                tlh.draw();
+            }
+            {
+                const tlh = new TimelineHandler(document.querySelector('#tlh05'));
+                tlh.createLineContentElement = function(line){
+                    const lineContentElement = document.createElement('div');
+                    lineContentElement.classList.add('line-content');
+                    
+                    if(line.lineContentElementHtml){
+                        lineContentElement.innerHTML = line.lineContentElementHtml;
+                    }else{
+                        const lineBarElement = document.createElement('div');
+                        lineBarElement.classList.add('line-bar');
+                        lineBarElement.classList.add('text-bg-danger')
+                        // lineBarElement.append(line.label??'')
+                        const lineIcon = document.createElement('div');
+                        lineIcon.classList.add('line-icon');
+                        lineIcon.append(line.start)
+                        lineBarElement.append(lineIcon)
+                        const lineLabel = document.createElement('div');
+                        lineLabel.classList.add('line-label');
+                        lineLabel.classList.add('text-center');
+                        lineLabel.append(line.label??'')
+                        lineBarElement.append(lineLabel)
+                        lineContentElement.append(lineBarElement);
+                    }
+                    return lineContentElement;
+                }
+                tlh.maxGrow = maxGrow;
+                tlh.setTimes(times);
+                tlh.setLines(lines);
+                console.log(lines); // .lineElement 가 생긴다. 후속조치는 알아서 또는 .createLineContentElement(line) 메소드 재정의하던지
+                tlh.draw();
+            }
         })
     </script>
 
 </head>
 <body>
     <div class="container">
-        <h1>UI timeline</h1>
-        <!-- Hover added -->
-        <div class="list-group">
-            <a href="https://github.com/mins01/ui-timeline" class="list-group-item list-group-item-action" >https://github.com/mins01/ui-timeline</a>
-        </div>
+        <h1>UI timeline - timelineHandler</h1>
+
         
         <hr>
-        <h2>TimelineHandler sample</h2>
-        <div class="timeline-responsive" >
-            <div class="timeline" id="tlh01" style="font-size: 14px;min-width: 600px; --max-grow:365" >
-                <div class="timeline-header">
-                    <div class="times"></div>
-                </div>
-                <div class="timeline-background">
-                    <div class="times"></div>
-                </div>
-                <div class="timeline-body">
-                    <div class="lines"></div>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <h2>TimelineHandler sample + dnese</h2>
-        <div class="timeline-responsive" >
-            <div class="timeline" id="tlh02" style="font-size: 14px;min-width: 600px; --max-grow:365" >
-                <div class="timeline-header">
-                    <div class="times"></div>
-                </div>
-                <div class="timeline-background">
-                    <div class="times"></div>
-                </div>
-                <div class="timeline-body">
-                    <div class="lines"></div>
+        <div class="my-3">
+
+            <h2>TimelineHandler sample</h2>
+            <div class="timeline-responsive" >
+                <div class="timeline" id="tlh01" style="font-size: 14px;min-width: 600px; --max-grow:365" >
+                    <div class="timeline-header">
+                        <div class="times"></div>
+                    </div>
+                    <div class="timeline-background">
+                        <div class="times"></div>
+                    </div>
+                    <div class="timeline-body">
+                        <div class="lines"></div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <hr>
-        <h2>TimelineHandler sample + data-dnese</h2>
-        <div class="timeline-responsive" >
-            <div class="timeline" id="tlh03" data-dense style="font-size: 14px;min-width: 600px; --max-grow:365" >
-                <div class="timeline-header">
-                    <div class="times"></div>
+            <hr>
+            <h2>TimelineHandler sample + dnese</h2>
+            <div class="timeline-responsive" >
+                <div class="timeline" id="tlh02" style="font-size: 14px;min-width: 600px; --max-grow:365" >
+                    <div class="timeline-header">
+                        <div class="times"></div>
+                    </div>
+                    <div class="timeline-background">
+                        <div class="times"></div>
+                    </div>
+                    <div class="timeline-body">
+                        <div class="lines"></div>
+                    </div>
                 </div>
-                <div class="timeline-background">
-                    <div class="times"></div>
+            </div>
+            <hr>
+            <h2>TimelineHandler sample + data-dnese</h2>
+            <div class="timeline-responsive" >
+                <div class="timeline" id="tlh03" data-dense style="font-size: 14px;min-width: 600px; --max-grow:365" >
+                    <div class="timeline-header">
+                        <div class="times"></div>
+                    </div>
+                    <div class="timeline-background">
+                        <div class="times"></div>
+                    </div>
+                    <div class="timeline-body">
+                        <div class="lines"></div>
+                    </div>
                 </div>
-                <div class="timeline-body">
-                    <div class="lines"></div>
+            </div>
+    
+            <hr>
+            <h2>TimelineHandler sample + no timeline-background</h2>
+            <div class="timeline-responsive" >
+                <div class="timeline" id="tlh04" data-dense style="font-size: 14px;min-width: 600px; --max-grow:365" >
+                    <div class="timeline-header">
+                        <div class="times"></div>
+                    </div>
+                    <div class="timeline-body">
+                        <div class="lines"></div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            <h2>TimelineHandler sample + no timeline-background</h2>
+            <div class="timeline-responsive" >
+                <div class="timeline" id="tlh04" data-dense style="font-size: 14px;min-width: 600px; --max-grow:365" >
+                    <div class="timeline-header">
+                        <div class="times"></div>
+                    </div>
+                    <div class="timeline-body">
+                        <div class="lines"></div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <h2>TimelineHandler sample + custom .createLineContentElement(line)</h2>
+            <div class="timeline-responsive" >
+                <div class="timeline" id="tlh05" data-dense style="font-size: 14px;min-width: 600px; --max-grow:365" >
+                    <div class="timeline-header">
+                        <div class="times"></div>
+                    </div>
+                    <div class="timeline-body">
+                        <div class="lines"></div>
+                    </div>
                 </div>
             </div>
         </div>
