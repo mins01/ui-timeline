@@ -13,28 +13,52 @@ class TimelineHandler{
     setTimes(times){
         this.times = times
     }
-    setLines(lines,dense=false){
+    setLines(lines){
         this.lines = lines
-        this.lineContainers = [];
+        // this.setContainers(this.lines,dense)
+    }
+    getLineContainers(dense=false){
+        const lineContainers = [];
         if(!dense){
             this.lines.forEach(line=>{
                 const lineContainer = [line];
-                this.lineContainers.push(lineContainer);
+                lineContainers.push(lineContainer);
+            })
+        }else{
+            const history = [];
+            this.lines.forEach(line => {
+                for(let i=0,m=lineContainers.length;i<m;i++){
+                    const inLines = lineContainers[i];
+                    if(inLines.some((inLine)=>{ return (line.start < (inLine.end+1) && inLine.start < (line.end+1)) })){ //충돌하는 것이 있는 경우 
+                        continue;
+                    }else{ //충돌하는 것이 하나도 없는 경우
+                        inLines.push(line);
+                        // console.log(`${i}번째에 추가`,line);
+                        return;
+                        
+                    }
+                }
+                // 아무 맞는 조건이 없으면
+                {
+                    const lineContainer = [line];
+                    lineContainers.push(lineContainer);
+                    // console.log(`마지막에에 추가`,line);
+                }
+                
             })
         }
+        return lineContainers;
     }
 
 
-    draw(){
+    draw(dense=null){
         const rootElement = this.rootElement;
-        
-        const backgroundElement = this.backgroundElement;
-
         rootElement.style.setProperty('--max-grow',this.maxGrow);
+        if(dense===null){ dense = rootElement.hasAttribute('data-dense'); }
 
         this.drawHeader();
         this.drawBackground();
-        this.drawBody();
+        this.drawBody(dense);
     }
 
     drawHeader(){
@@ -78,18 +102,19 @@ class TimelineHandler{
         });
     }
 
-    drawBody(){
+    drawBody(dense=false){
         const bodyElement = this.bodyElement;
         if(!bodyElement) return;
         
         const linesElement = bodyElement.querySelector('.lines');
         if(!linesElement) return;
         linesElement.replaceChildren();
-console.log(this.lineContainers);
+        // console.log(this.lineContainers);
 
-        this.lineContainers.forEach((lines)=>{
+        const lineContainer = this.getLineContainers(dense)
+        lineContainer.forEach((lines)=>{
             const lineContainerElement = this.createLineContainerElement(lines);
-            console.log(lines);
+            // console.log(lines);
             
             linesElement.append(lineContainerElement);
         })
@@ -119,8 +144,8 @@ console.log(this.lineContainers);
     createLineElement(line){
         const lineElement = document.createElement('div');
         lineElement.classList.add('line');
-        lineElement.dataset.start = line.start;
-        lineElement.dataset.end = line.end;
+        lineElement.style.setProperty('--start',line.start);
+        lineElement.style.setProperty('--end',line.end);
         line.lineElement = lineElement; // 엘레멘트 연결시킴
         lineElement.append(this.createLineContentElement(line));
         return lineElement;

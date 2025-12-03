@@ -40,8 +40,7 @@
     <script src="TimelineHandler.js"></script>
     <script>
         window.addEventListener('load',(event)=>{
-            const tlh01 = new TimelineHandler(document.querySelector('#tlh01'));
-            tlh01.maxGrow = 12;
+            const maxGrow = 12;
             const times = [
                 {'label':'1월','grow':1},
                 {'label':'2월','grow':1},
@@ -55,8 +54,7 @@
                 {'label':'10월','grow':1},
                 {'label':'11월','grow':1},
                 {'label':'12월','grow':1},
-            ]
-            tlh01.setTimes(times);
+            ];
             const lines = [
                 {'label':'반기 : 1월~6월','start':1,'end':6},
                 {'label':'반기 : 7월~12월','start':7,'end':12},
@@ -64,12 +62,34 @@
                 {'label':'2분기 : 4월~6월','start':4,'end':6},
                 {'label':'3분기 : 7월~9월','start':7,'end':9},
                 {'label':'4분기 : 10월~12월','start':10,'end':12},
-                {'label':'lineContentElementHtml','start':4,'end':12,'lineContentElementHtml':'<div class="line-bar text-bg-success"><div class="line-icon">D</div><div class="line-label">lineContentElementHtml 예</div></div>'},
-            ]
-            tlh01.setLines(lines);
-            console.log(lines); // .lineElement 가 생긴다. 후속조치는 알아서 또는 .createLineContentElement(line) 메소드 재정의하던지
-            
-            tlh01.draw();
+                {'label':'소수점','start':1.5,'end':2.7-1},
+                {'label':'lineContentElementHtml','start':3,'end':11,'lineContentElementHtml':'<div class="line-bar text-bg-success"><div class="line-icon">D</div><div class="line-label">lineContentElementHtml 예</div></div>'},
+            ];
+
+            {
+                const tlh = new TimelineHandler(document.querySelector('#tlh01'));
+                tlh.maxGrow = maxGrow;
+                tlh.setTimes(times);
+                tlh.setLines(lines);
+                console.log(lines); // .lineElement 가 생긴다. 후속조치는 알아서 또는 .createLineContentElement(line) 메소드 재정의하던지
+                tlh.draw();
+            }
+            {
+                const tlh = new TimelineHandler(document.querySelector('#tlh02'));
+                tlh.maxGrow = maxGrow;
+                tlh.setTimes(times);
+                tlh.setLines(lines);
+                console.log(lines); // .lineElement 가 생긴다. 후속조치는 알아서 또는 .createLineContentElement(line) 메소드 재정의하던지
+                tlh.draw(true);
+            }
+            {
+                const tlh = new TimelineHandler(document.querySelector('#tlh03'));
+                tlh.maxGrow = maxGrow;
+                tlh.setTimes(times);
+                tlh.setLines(lines);
+                console.log(lines); // .lineElement 가 생긴다. 후속조치는 알아서 또는 .createLineContentElement(line) 메소드 재정의하던지
+                tlh.draw();
+            }
         })
     </script>
 
@@ -95,8 +115,36 @@
                 <div class="timeline-body">
                     <div class="lines"></div>
                 </div>
-
-
+            </div>
+        </div>
+        <hr>
+        <h2>TimelineHandler sample + dnese</h2>
+        <div class="timeline-responsive" >
+            <div class="timeline" id="tlh02" style="font-size: 14px;min-width: 600px; --max-grow:365" >
+                <div class="timeline-header">
+                    <div class="times"></div>
+                </div>
+                <div class="timeline-background">
+                    <div class="times"></div>
+                </div>
+                <div class="timeline-body">
+                    <div class="lines"></div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <h2>TimelineHandler sample + data-dnese</h2>
+        <div class="timeline-responsive" >
+            <div class="timeline" id="tlh03" data-dense style="font-size: 14px;min-width: 600px; --max-grow:365" >
+                <div class="timeline-header">
+                    <div class="times"></div>
+                </div>
+                <div class="timeline-background">
+                    <div class="times"></div>
+                </div>
+                <div class="timeline-body">
+                    <div class="lines"></div>
+                </div>
             </div>
         </div>
     </div>
