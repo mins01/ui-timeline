@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ko" >
+<head>
+    <title>timeline + timelineHandler</title>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="http://www.mins01.com/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="/js/ForGoogle.js"></script>
+    <!-- google analytics -->
+    <script>if(window.ForGoogle){ ForGoogle.analytics() }else{ console.log("failure : ForGoogle.analytics()");}</script>
+
+
+    <!-- jquery 관련 -->
+    <!-- <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script> -->
+
+    <!-- 부트스트랩 5.3.x -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> -->
+
+    <!-- vue.js -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+
+    <!-- meta og -->
+
+    <meta property="og:title" content="timeline + timelineHandler">
+    <meta property="og:description" content="timeline + timelineHandler">
+    <meta name="og:image" content="http://www.mins01.com/img/logo.gif">
+    <meta property="og:image:width" content="190">
+    <meta property="og:image:height" content="70" />
+    <meta property="og:site_name" content="timeline" />
+    <meta property="og:type" content="website">
+
+    <!-- //meta og -->
+    <link rel="stylesheet" href="timeline.css">
+    <script src="TimelineHandler.js"></script>
+    <script>
+        window.addEventListener('load',(event)=>{
+            const tlh01 = new TimelineHandler(document.querySelector('#tlh01'));
+            tlh01.maxGrow = 12;
+            const times = [
+                {'label':'1월','grow':1},
+                {'label':'2월','grow':1},
+                {'label':'3월','grow':1},
+                {'label':'4월','grow':1},
+                {'label':'5월','grow':1},
+                {'label':'6월','grow':1},
+                {'label':'7월','grow':1},
+                {'label':'8월','grow':1},
+                {'label':'9월','grow':1},
+                {'label':'10월','grow':1},
+                {'label':'11월','grow':1},
+                {'label':'12월','grow':1},
+            ]
+            tlh01.setTimes(times);
+            const lines = [
+                {'label':'반기 : 1월~6월','start':1,'end':6},
+                {'label':'반기 : 7월~12월','start':7,'end':12},
+                {'label':'1분기 : 1월~3월','start':1,'end':3},
+                {'label':'2분기 : 4월~6월','start':4,'end':6},
+                {'label':'3분기 : 7월~9월','start':7,'end':9},
+                {'label':'4분기 : 10월~12월','start':10,'end':12},
+                {'label':'lineContentElementHtml','start':4,'end':12,'lineContentElementHtml':'<div class="line-bar text-bg-success"><div class="line-icon">D</div><div class="line-label">lineContentElementHtml 예</div></div>'},
+            ]
+            tlh01.setLines(lines);
+            console.log(lines); // .lineElement 가 생긴다. 후속조치는 알아서 또는 .createLineContentElement(line) 메소드 재정의하던지
+            
+            tlh01.draw();
+        })
+    </script>
+
+</head>
+<body>
+    <div class="container">
+        <h1>UI timeline</h1>
+        <!-- Hover added -->
+        <div class="list-group">
+            <a href="https://github.com/mins01/ui-timeline" class="list-group-item list-group-item-action" >https://github.com/mins01/ui-timeline</a>
+        </div>
+        
+        <hr>
+        <h2>TimelineHandler sample</h2>
+        <div class="timeline-responsive" >
+            <div class="timeline" id="tlh01" style="font-size: 14px;min-width: 600px; --max-grow:365" >
+                <div class="timeline-header">
+                    <div class="times"></div>
+                </div>
+                <div class="timeline-background">
+                    <div class="times"></div>
+                </div>
+                <div class="timeline-body">
+                    <div class="lines"></div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
